@@ -38,6 +38,14 @@
   font-size: 1.5rem;
 }
 
+Button:active{
+  background-color: rgb(111, 79, 117);
+}
+
+.selected {
+  background-color: rgb(190, 122, 202);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -45,4 +53,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.hands{
+  display: inline-block;
+  width: 200px;
+}
+
+ul {
+  width: 200px;
+  text-align: left;
+  font-size: 10pt;
+  list-style: none
+}
+
+.day > .App {
+  color: #111;
+} 
+.night > .App {
+  color: #fff;
 }

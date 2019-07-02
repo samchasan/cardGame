@@ -2,11 +2,14 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {random, floor} from 'mathjs'
+import $ from 'jquery';
+
 
 // import logo from './logo.svg';
 import {cards} from './cards.js'
 import './App.css';
-import { isFlowDeclaration } from '@babel/types';
+import { strict } from 'assert';
+// import { isFlowDeclaration } from '@babel/types';
 
 const players = [3,4,5,6,7,8,9]
 const stages =['one','two','three','four','five','six','seven','eight']
@@ -23,6 +26,20 @@ let assignments = {
   playerNine: []
 }
 
+let choices = {
+  playerOne: '',
+  playerTwo: '',
+  playerThree: '',
+  playerFour: '',
+  playerFive: '',
+  playerSix: '',
+  playerSeven: '',
+  playerEight: '',
+  playerNine: ''
+}
+
+let situationCard = 'none'
+
 class App extends React.Component {
 
   constructor(props) {
@@ -30,6 +47,7 @@ class App extends React.Component {
     this.setPlayerNo = this.setPlayerNo.bind(this)
     this.advanceGame = this.advanceGame.bind(this)
     this.rewindGame = this.rewindGame.bind(this)
+    this.selectCard = this.selectCard.bind(this)
     this.topText = this.topText.bind(this)
     this.game = this.game.bind(this)
     this.button = this.button.bind(this)
@@ -37,7 +55,19 @@ class App extends React.Component {
     this.state = {
       gameStage: stages[0],
       players: 0,
+      CD: 'none',
+      situationCard: 'none'
     };
+  }
+
+  selectCard() {
+    // const clicked = event
+    console.log('in select card')
+    const shuffledDeck = this.shuffle(cards.situation)
+    situationCard = shuffledDeck[0]
+    this.setState({situationCard: situationCard});
+    console.log(situationCard, shuffledDeck)
+
   }
 
   setPlayerNo(event){
@@ -48,60 +78,64 @@ class App extends React.Component {
 
   advanceGame(){
     let level = this.state.gameStage
-    if(level===stages[7]){
-      this.setState({gameStage: stages[0]});
+    stages.forEach((stage,i) =>{
+      if(level===stage){
+        this.setState({gameStage: stages[i+1]});
+      }
+    })
+  }
+
+  selectPatterns(event){
+    // console.log(event.target.id)
+
+    const str = event.target.id
+    if (str.includes('playerOne')){
+      choices.playerOne = str
+      classState = 'active'
     }
-    if(level===stages[6]){
-      this.setState({gameStage: stages[7]});
+    if (str.includes('playerTwo')){
+      choices.playerTwo = str
+      console.log(choices)
     }
-    if(level===stages[5]){
-      this.setState({gameStage: stages[6]});
+    if (str.includes('playerThree')){
+      choices.playerThree = str
+      console.log(choices)
     }
-    if(level===stages[4]){
-      this.setState({gameStage: stages[5]});
+    if (str.includes('playerFour')){
+      choices.playerFour = str
+      console.log(choices)
     }
-    if(level===stages[3]){
-      this.setState({gameStage: stages[4]});
+    if (str.includes('playerFive')){
+      choices.playerFive = str
+      console.log(choices)
     }
-    if(level===stages[2]){
-      this.setState({gameStage: stages[3]});
+    if (str.includes('playerSix')){
+      choices.playerSix = str
+      console.log(choices)
     }
-    if(level===stages[1]){
-      this.setState({gameStage: stages[2]});
+    if (str.includes('playerSeven')){
+      choices.playerSeven = str
+      console.log(choices)
     }
-    if(level===stages[0]){
-      this.setState({gameStage: stages[1]});
+    if (str.includes('playerEight')){
+      choices.playerEight = str
+      console.log(choices)
+    }
+    if (str.includes('playerNine')){
+      choices.playerNine = str
+      console.log(choices)
     }
   }
+
 
   rewindGame(){
     let level = this.state.gameStage
-    if(level===stages[1]){
-      this.setState({gameStage: stages[0]});
-    }
-    if(level===stages[2]){
-      this.setState({gameStage: stages[1]});
-    }
-    if(level===stages[3]){
-      this.setState({gameStage: stages[2]});
-    }
-    if(level===stages[4]){
-      this.setState({gameStage: stages[3]});
-    }
-    if(level===stages[5]){
-      this.setState({gameStage: stages[4]});
-    }
-    if(level===stages[6]){
-      this.setState({gameStage: stages[5]});
-    }
-    if(level===stages[7]){
-      this.setState({gameStage: stages[6]});
-    }
-    if(level===stages[8]){
-      this.setState({gameStage: stages[7]});
-    }
+    stages.forEach((stage,i) =>{
+      if(level===stage){
+        this.setState({gameStage: stages[i-1]});
+      }
+    })
   }
-
 
   topText(){
     const s = this.state.gameStage
@@ -109,7 +143,7 @@ class App extends React.Component {
       return (
            <header>
              Welcome To
-             <h1> SURVIVING DESIGN PRINCIPLES </h1>
+             <h1> SURVIVING DESIGN PROJECTS </h1>
            </header>
            )
         }
@@ -137,6 +171,14 @@ class App extends React.Component {
     }
       
     }  
+
+  clean(obj) {
+      for (var propName in obj) { 
+        if (obj[propName].length < 5 ) {
+          delete obj[propName];
+        }
+      }
+    }  
   
   shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
@@ -161,6 +203,11 @@ class App extends React.Component {
     const s = this.state.gameStage
     const p = this.state.players
 
+     ///////////////////////////////////
+     ///////////// Stage 1 /////////////
+     ///////////////////////////////////
+     ///////////////////////////////////
+
     if (s === stages[0]){
       return(
         <Form>
@@ -181,10 +228,16 @@ class App extends React.Component {
         </Form>
       )}
 
+     ///////////////////////////////////
+     ///////////// Stage 2 /////////////
+     ///////////////////////////////////
+     ///////////////////////////////////
+
      if (s === stages [1]){
         console.log(p)
 
         const creativeDirector = floor(random(3,p))
+        this.state.CD = creativeDirector
 
         return(
           <div>
@@ -193,6 +246,10 @@ class App extends React.Component {
           </div>
         )
      } 
+     ///////////////////////////////////
+     ///////////// Stage 3 /////////////
+     ///////////////////////////////////
+     ///////////////////////////////////
 
      if (s === stages [2]){
       const numCards = floor(cards.pattern.length / p)
@@ -242,76 +299,109 @@ class App extends React.Component {
           }  
         })
 
-        function clean(obj) {
-          for (var propName in obj) { 
-            if (obj[propName].length < 5 ) {
-              delete obj[propName];
-            }
-          }
-        }
-        
-        clean(assignments);
-
-        const hands = Object.keys(assignments)
-        // console.log(hands)
-
-        Object.entries(assignments).forEach(assignment => {
-          assignment.map(card => (
-            console.log(card)
-            // <p> {card}</p>
-           ))
-        })
+        this.clean(assignments);
+    
+        const hands = Object.keys(assignments).map(assignment => 
+                <div className='hands' id={assignment} key={assignment}>
+                <h4>{assignment}</h4>
+                <ul>{assignments[assignment].map(val => 
+                  <li id={val} key={val}>{val}</li>
+                  )}
+                </ul> 
+                </div>
+              )
 
            return(
             <div>
                 Stage 3
-                {Object.entries(assignments).forEach(assignment => {
-                    assignment.map(card => (
-                      // console.log(card)
-                      <p> {card}</p>
-                    ))
-                  })
-                }
+                {hands}
              </div>
             )
         }
       
-        // <Form.Row>
-        // {players.map(playerNo => (
-        //   <div id='playerNo' key={playerNo} onChange={this.setPlayerNo}>
-        //     <Form.Check 
-        //       inline
-        //       type='radio'
-        //       id={playerNo}
-        //       name='playerRadios'
-        //       label={playerNo}
-        //     />
-        //   </div>
-        // ))}
-        // </Form.Row>
+        ///////////////////////////////////
+        ///////////// Stage 4 /////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
 
+        if (s === stages[3]){
 
-        if (s === stages [3]){
           return(
             <div>
               Stage 4
+              <p> Player {this.state.CD} please pick a situation card</p>
+
+              <p>{situationCard}</p>
+
+              <Button variant="flat" size="m" onClick={this.selectCard}>
+                  Select
+              </Button>
             </div>
            )
         }
-        if (s === stages [4]){
+
+        ///////////////////////////////////
+        ///////////// Stage 5 /////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
+        
+        if (s === stages[4]){
           return(
             <div>
               Stage 5
+              <p>{situationCard}</p>
+              <p> Player {this.state.CD} please tell a story</p>
             </div>
            )
         }
-        if (s === stages [5]){
+
+        ///////////////////////////////////
+        ///////////// Stage 6 /////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
+
+
+        if (s === stages[5]){
+
+          console.log(choices)
+
+          const hands = Object.keys(assignments).map(assignment => 
+            <div className='hands' id={assignment} key={assignment}>
+            <h4>{assignment}</h4>
+            <div>{assignments[assignment].map(val => 
+              <Button className={activeState}
+                  variant="flat" size="m" onClick={this.selectPatterns}
+                  id={assignment + '_' + val} key={val}>{val}</Button>
+              )}
+            </div> 
+            </div>
+          )
+
+          this.clean(choices);
+
+          const picks = Object.keys(choices).map(choice =>
+              <p>{choice}</p>
+            )
+        
+
           return(
             <div>
               Stage 6
-            </div>
+              <p>{situationCard}</p>
+
+              <p> Players other than {this.state.CD} please choose pattern cards</p>   
+                {hands}  
+                {picks}     
+              </div>
            )
         }
+
+          ///////////////////////////////////
+          ///////////// Stage 7 /////////////
+          ///////////////////////////////////
+          ///////////////////////////////////
+
+
         if (s === stages [6]){
           return(
             <div>

@@ -1,12 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+// import { BrowserRouter, Link, Route } from "react-router";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// import Gameroom from "./js/pages/Gameroom";
+import Layout from "./js/pages/Layout";
+import Nav from './js/components/layout/Nav'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+import Contact from "./js/pages/Contact";
+import Home from './js/pages/Home'
+import About from './js/pages/About'
+import Error from './js/pages/Error'
+import Game from './js/pages/Game'
+
+  const LayoutRoute = ({component: Component, ...rest}) => {
+    return (
+      <Route {...rest} render={matchProps => (
+        <Layout>
+          <Component {...matchProps} />
+        </Layout>
+      )} />
+    )
+  };
+
+
+
+const app = document.getElementById('root')
+
+ReactDOM.render(
+    <BrowserRouter>
+        <div>
+            <Nav />
+            <Switch>
+                    {/* <Route path="/" component={Layout} /> */}
+                    <LayoutRoute path='/' component={Home} exact/>
+                    <LayoutRoute path='/contact' component={Contact} />
+                    <LayoutRoute path='/about' component={About} />
+                    <LayoutRoute path='/game' component={Game}/>
+                    <LayoutRoute component={Error} />
+            </Switch>
+        </div>
+    </BrowserRouter>, app);
+

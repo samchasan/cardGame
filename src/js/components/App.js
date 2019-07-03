@@ -2,13 +2,13 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {random, floor} from 'mathjs'
-import $ from 'jquery';
+// import $ from 'jquery';
 
 
 // import logo from './logo.svg';
-import {cards} from './cards.js'
-import './App.css';
-import { strict } from 'assert';
+import {cards} from '../../cards.js'
+import '../../App.css';
+// import { strict } from 'assert';
 // import { isFlowDeclaration } from '@babel/types';
 
 const players = [3,4,5,6,7,8,9]
@@ -91,7 +91,7 @@ class App extends React.Component {
     const str = event.target.id
     if (str.includes('playerOne')){
       choices.playerOne = str
-      classState = 'active'
+      // classState = 'active'
     }
     if (str.includes('playerTwo')){
       choices.playerTwo = str
@@ -369,7 +369,7 @@ class App extends React.Component {
             <div className='hands' id={assignment} key={assignment}>
             <h4>{assignment}</h4>
             <div>{assignments[assignment].map(val => 
-              <Button className={activeState}
+              <Button 
                   variant="flat" size="m" onClick={this.selectPatterns}
                   id={assignment + '_' + val} key={val}>{val}</Button>
               )}

@@ -2,14 +2,9 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {random, floor} from 'mathjs'
-// import $ from 'jquery';
-
-
-// import logo from './logo.svg';
-import {cards} from '../../cards.js'
+import {cards} from './game/cards.js/index.js.js'
 import '../../App.css';
-// import { strict } from 'assert';
-// import { isFlowDeclaration } from '@babel/types';
+
 
 const players = [3,4,5,6,7,8,9]
 const stages =['one','two','three','four','five','six','seven','eight']

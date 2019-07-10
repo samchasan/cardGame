@@ -14,6 +14,12 @@ import Home from './js/pages/Home'
 import About from './js/pages/About'
 import Error from './js/pages/Error'
 import Game from './js/pages/Game'
+import Users from './js/pages/Game'
+
+const app = document.getElementById('root')
+
+
+
 
   const LayoutRoute = ({component: Component, ...rest}) => {
     return (
@@ -27,18 +33,17 @@ import Game from './js/pages/Game'
 
 
 
-const app = document.getElementById('root')
 
 ReactDOM.render(
     <BrowserRouter>
         <div>
             <Nav />
             <Switch>
-                    {/* <Route path="/" component={Layout} /> */}
                     <LayoutRoute path='/' component={Home} exact/>
                     <LayoutRoute path='/contact' component={Contact} />
                     <LayoutRoute path='/about' component={About} />
-                    <LayoutRoute path='/game' component={Game}/>
+                    <LayoutRoute path='/users' component={Users} />
+                    <LayoutRoute path='/game/:id' component={Game}/>
                     <LayoutRoute component={Error} />
             </Switch>
         </div>

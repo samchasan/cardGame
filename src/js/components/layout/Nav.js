@@ -11,14 +11,11 @@ export default class Nav extends React.Component {
 
 
   render() {
-  
     return (
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <NavLink to="/"> Home | </NavLink>
-        <NavLink to="about"> About | </NavLink>
-        <NavLink to="contact"> Contact</NavLink>
-        <NavLink to="game"> Game </NavLink>
-
+        <NavLink to="/about"> About | </NavLink>
+        <NavLink to="/contact"> Contact</NavLink>
       </nav>
     );
   }

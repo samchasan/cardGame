@@ -44,9 +44,9 @@ export default class Games extends React.Component {
 
     return (
       <div>
-        <button onClick={this.createGame.bind(this)}>Create a Game!</button>
-        <h1>Games</h1>
-        <ul>{GameComponents}</ul>
+        <button onClick={this.createGame.bind(this)} a>Create a Game!</button>
+        {/* <h1>Games</h1>
+        <ul>{GameComponents}</ul> */}
       </div>
     );
   }

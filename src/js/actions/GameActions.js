@@ -15,6 +15,23 @@ export function deleteGame(id) {
   });
 }
 
+export function createUser(name) {
+    
+    dispatcher.dispatch({
+      type: "CREATE_USER",
+      name,
+    });
+  }
+
+  export function deleteUser(name) {
+    dispatcher.dispatch({
+      type: "DELETE_USER",
+      name,
+    });
+  }
+
+
+
 export function reloadGames() {
   // axios("http://someurl.com/somedataendpoint").then((data) => {
   //   console.log("got the data!", data);

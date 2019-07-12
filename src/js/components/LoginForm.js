@@ -34,8 +34,13 @@ export default class LoginForm extends React.Component {
         e.preventDefault()
         const {socket} = this.props
         const nickname = this.state.nickname
+        const room = this.props.roomName
+        const params = {
+            'nickname': nickname,
+            'room': room
+        }
         // console.log(nickname)
-        socket.emit(VERIFY_USER, nickname, this.setUser)
+        socket.emit(VERIFY_USER, params, this.setUser)
     }
 
     handleChange = (e) => {

@@ -1,9 +1,10 @@
 const uuidv4 = require('uuid/v4')
 
-const createUser =({name=""} = {}) => (
+const createUser = ({gameRoom='', name=''} = {}) => (
  {
      id: uuidv4(), 
-     name
+     gameRoom,
+     name 
  }
 )
 

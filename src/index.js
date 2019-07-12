@@ -44,6 +44,7 @@ ReactDOM.render(
                     <LayoutRoute path='/about' component={About} />
                     <LayoutRoute path='/users' component={Users} />
                     <LayoutRoute path='/game/:id' component={Game}/>
+                    <Route path='/events' />
                     <LayoutRoute component={Error} />
             </Switch>
         </div>

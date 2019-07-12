@@ -1,80 +1,35 @@
 import React from 'react'
 import Games from "./Games";
-import LoginForm from '../components/LoginForm'
-import io from 'socket.io-client'
-import {USER_CONNECTED, LOGOUT, USER_DISCONNECTED, VERIFY_USER} from '../Events'
-const socketURL = 'http://localhost:3001'
+import * as GameActions from "../actions/GameActions";
+const randomWords = require('random-words');
+
 
 
 class Home extends React.Component{
     constructor(props){
         super(props)
-        this.initSocket = this.initSocket.bind(this)
-        this.setUser = this.setUser.bind(this)
-        this.logout = this.logout.bind(this)
         this.state = {
-            socket: null,
-            user: null
+            gameRoom: null
           };
     }
 
 
   componentWillMount(){
-    this.initSocket()
+    const roomName = randomWords({exactly:1, wordsPerString:2, separator:'-'})
+    this.setState({gameRoom: roomName})
+    // GameActions.createGame(roomName);
+    // console.log('creating game', roomName)
   }
 
-  initSocket = () => {
-    const socket = io(socketURL)
-    socket.on('connect', ()=> {
-      console.log('connected')
-    //   console.log(socket)
-
-    })
-    this.setState({socket})
-  }
-
-  setUser = (user) => {
-    const {socket} = this.state
-    // console.log('state in home', this.state)
-    socket.emit(USER_CONNECTED, user);
-    this.setState({user: user})
-    console.log(user)
-  }
-
-  logout = () => {
-    const {socket} = this.state
-    socket.emit(LOGOUT)
-    this.setState({user: null})
-  }
 
     render (){
-        const {title} = this.props 
-    const {socket} = this.state
-
-
-    let username
-
-    if(this.state.user){
-     username = this.state.user.name + '!'
-    }
-
-   const login = () => { 
-       if (this.state.user === null){
-        return (
-            <LoginForm socket={socket} setUser={this.setUser}/>
-        )
-    }else {
-        return (
-            <h2> Hello, {username} </h2>
-        )
-    }
-}
+    
 
     return (
         <div>
-         < Games />
+         {/* < Games /> */}
          <div className='container'>
-            {login()}
+         <a href={'/game/' + this.state.gameRoom}>Create a Game!</a>
         </div>
         </div>
         

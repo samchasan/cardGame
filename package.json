@@ -9,7 +9,7 @@
     "history": "^4.9.0",
     "http": "0.0.0",
     "jquery": "^3.4.1",
-    "mathjs": "^6.0.2",
+    "mathjs": "^7.5.1",
     "random-words": "^1.1.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
